@@ -6,7 +6,7 @@ use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
-class MainController extends Controllers
+class MainController extends Controller
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class MainController extends Controllers
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['adminCP'],
+                        'roles' => ['accessCP'],
                     ],
                 ],
             ],
@@ -30,5 +30,10 @@ class MainController extends Controllers
                 ],
             ],
         ];
+    }
+
+    public function actionDefault()
+    {
+        return 'default';
     }
 }

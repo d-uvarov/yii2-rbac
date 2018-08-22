@@ -3,8 +3,8 @@
 namespace uvarov\yii2rbac\controllers;
 
 use Yii;
-use app\modules\rbac\models\Role;
-use app\modules\rbac\models\RoleSearch;
+use uvarov\yii2rbac\models\Role;
+use uvarov\yii2rbac\models\RoleSearch;
 use yii\web\NotFoundHttpException;
 
 /**

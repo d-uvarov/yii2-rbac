@@ -72,9 +72,9 @@ class AssignmentController extends MainController
      *
      * @return mixed
      */
-    public function actionUpdate($itemName, $userId)
+    public function actionUpdate($item_name, $user_id)
     {
-        $model = $this->findModel($itemName, $userId);
+        $model = $this->findModel($item_name, $user_id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
