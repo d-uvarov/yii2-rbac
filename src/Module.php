@@ -14,14 +14,14 @@ use yii\web\ErrorHandler;
 class Module extends \yii\base\Module
 {
     /**
-     * @var
+     * @var array
      */
-    public $db;
+    protected $db = null;
 
     /**
-     * @var
+     * @var array
      */
-    public $user;
+    protected $user = null;
 
     /**
      * @var string
@@ -34,23 +34,26 @@ class Module extends \yii\base\Module
      */
     public function init()
     {
+        parent::init();
         Yii::setAlias('@rbac', __DIR__);
 
-        // TODO: добавить обязательность.
-        if (!Yii::$app->has('db')) {
-            Yii::$app->set('db', $this->db);
+        if (is_null($this->db)) {
+            throw new HttpException(500, "Db not set");
         }
 
-        // TODO: добавить обязательность.
+        if (is_null($this->user)) {
+            throw new HttpException(500, "User not set");
+        }
+
+        Yii::$app->set('db', $this->db);
         Yii::$app->set('user', $this->user);
 
-        parent::init();
 
         // Register Error handler
         Yii::configure($this, [
             'components' => [
                 'errorHandler' => [
-                    'class'       => ErrorHandler::class,
+                    'class' => ErrorHandler::class,
                 ],
             ],
         ]);
@@ -59,6 +62,12 @@ class Module extends \yii\base\Module
         $handler = $this->get('errorHandler');
         \Yii::$app->set('errorHandler', $handler);
         $handler->register();
+
+        $authManager = Yii::$app->getAuthManager();
+
+        if (is_null($authManager)) {
+            throw new HttpException(500, "AuthManager is empty");
+        }
 
         $user = Yii::$app->getUser();
 
@@ -72,5 +81,21 @@ class Module extends \yii\base\Module
             'yii\bootstrap\BootstrapPluginAsset',
             'yii\bootstrap\BootstrapAsset',
         ];
+    }
+
+    /**
+     * @param array $db
+     */
+    public function setDb(array $db)
+    {
+        $this->db = $db;
+    }
+
+    /**
+     * @param array $user
+     */
+    public function setUser(array $user)
+    {
+        $this->user = $user;
     }
 }

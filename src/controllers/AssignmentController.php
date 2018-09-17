@@ -32,15 +32,15 @@ class AssignmentController extends MainController
     /**
      * Displays a single Assignment model.
      *
-     * @param string $itemName
-     * @param string $userId
+     * @param string $item_name
+     * @param string $user_id
      *
      * @return mixed
      */
-    public function actionView($itemName, $userId)
+    public function actionView($item_name, $user_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($itemName, $userId),
+            'model' => $this->findModel($item_name, $user_id),
         ]);
     }
 
@@ -67,8 +67,8 @@ class AssignmentController extends MainController
      * Updates an existing Assignment model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
-     * @param string $itemName
-     * @param string $userId
+     * @param string $item_name
+     * @param string $user_id
      *
      * @return mixed
      */
@@ -89,14 +89,14 @@ class AssignmentController extends MainController
      * Deletes an existing Assignment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      *
-     * @param string $itemName
-     * @param string $userId
+     * @param string $item_name
+     * @param string $user_id
      *
      * @return mixed
      */
-    public function actionDelete($itemName, $userId)
+    public function actionDelete($item_name, $user_id)
     {
-        $this->findModel($itemName, $userId)->delete();
+        $this->findModel($item_name, $user_id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -105,15 +105,15 @@ class AssignmentController extends MainController
      * Finds the Assignment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      *
-     * @param string $itemName
-     * @param string $userId
+     * @param string $item_name
+     * @param string $user_id
      *
      * @return Assignment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($itemName, $userId)
+    protected function findModel($item_name, $user_id)
     {
-        if (($model = Assignment::findOne(['item_name' => $itemName, 'user_id' => $userId])) !== null) {
+        if (($model = Assignment::findOne(['item_name' => $item_name, 'user_id' => $user_id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

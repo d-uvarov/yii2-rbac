@@ -2,67 +2,19 @@
 
 namespace uvarov\yii2rbac\models;
 
-use Yii;
 use yii\rbac\Permission;
 
 /**
- * This is the model class for table "auth_item".
+ * Class Role
  *
- * @property string   $name
- * @property int      $type
- * @property string   $description
- * @property string   $rule_name
- * @property resource $data
- * @property int      $created_at
- * @property int      $updated_at
+ * @package uvarov\yii2rbac\models
  */
-class Role extends \yii\db\ActiveRecord
+class Role extends AuthItem
 {
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'auth_item';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['rule_name'], 'default', 'value' => null],
-            [['name', 'type'], 'required'],
-            [['type', 'created_at', 'updated_at'], 'integer'],
-            [['description', 'data'], 'string'],
-            [['name', 'rule_name'], 'string', 'max' => 64],
-            [['name'], 'unique'],
-//            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthRule::className(), 'targetAttribute' => ['rule_name' => 'name']],
-        ];
-    }
-
     public function init()
     {
         $this->type = Permission::TYPE_ROLE;
         parent::init();
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'name'        => 'Name',
-            'type'        => 'Type',
-            'description' => 'Description',
-            'rule_name'   => 'Rule Name',
-            'data'        => 'Data',
-            'created_at'  => 'Created At',
-            'updated_at'  => 'Updated At',
-        ];
     }
 
     /**

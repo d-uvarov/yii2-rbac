@@ -9,11 +9,6 @@ namespace uvarov\yii2rbac\models;
  */
 class AssignmentQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
     /**
      * @inheritdoc
      * @return Assignment[]|array
