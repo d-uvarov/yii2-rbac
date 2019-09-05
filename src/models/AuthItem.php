@@ -24,7 +24,7 @@ class AuthItem extends \yii\db\ActiveRecord
 {
     const COL_TYPE        = 'type';
     const COL_NAME        = 'name';
-    const COL_DESCRIPTION = 'name';
+    const COL_DESCRIPTION = 'description';
     const COL_RULE_NAME   = 'rule_name';
     const COL_DATA        = 'data';
     const COL_CREATED_AT  = 'created_at';
